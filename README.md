@@ -64,6 +64,11 @@ This is the required structure.
 - `alpha`: A column of the same letter for all rows. Not used in classification but still expected by the `DataProcessor`.
 - `text`: The sentence or sequence of text.
 
+### Train/Evaluate
+% cd src
+% python transformer-compliance.py ../config-bert.json
+Depending on size of datasize, it may take a while.
+
 ### Evaluation Metrics
 
 The evaluation process in the [transformer-compliance.py](transformer-compliance.py) notebook outputs the confusion matrix, and the Matthews correlation coefficient. The `get_eval_reports()` function takes the predictions and the ground truth labels as parameters, therefore you can add any custom metrics calculations to the function as required.
