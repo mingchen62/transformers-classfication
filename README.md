@@ -65,8 +65,11 @@ This is the required structure.
 - `text`: The sentence or sequence of text.
 
 ### Train/Evaluate
+
 % cd src
+
 % python transformer-compliance.py ../config-bert.json
+
 Depending on size of datasize, it may take a while.
 
 ### Evaluation Metrics
