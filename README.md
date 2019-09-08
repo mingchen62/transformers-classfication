@@ -20,7 +20,7 @@ else:
 
 ### Current Pretrained Models
 
-The table below shows the currently available model types and their models. You can use any of these by setting the `model_type` and `model_name` in the `args` dictionary. For more information about pretrained models, see [HuggingFace docs](https://huggingface.co/pytorch-transformers/pretrained_models.html).
+The table below shows the currently available model types and their models. You can use any of these by setting the `model_type` and `model_name` in the `config` dictionary. For more information about pretrained models, see [HuggingFace docs](https://huggingface.co/pytorch-transformers/pretrained_models.html).
 
 | Architecture        | Model Type           | Model Name  | Details  |
 | :------------- |:----------| :-------------| :-----------------------------|
@@ -74,4 +74,4 @@ Depending on size of datasize, it may take a while.
 
 ### Evaluation Metrics
 
-The evaluation process in the [transformer-compliance.py](transformer-compliance.py) notebook outputs the confusion matrix, and the Matthews correlation coefficient. The `get_eval_reports()` function takes the predictions and the ground truth labels as parameters, therefore you can add any custom metrics calculations to the function as required.
+The evaluation process in the [transformer-compliance.py](transformer-compliance.py)  outputs the confusion matrix, and the Matthews correlation coefficient. The `get_eval_reports()` function takes the predictions and the ground truth labels as parameters, therefore you can add any custom metrics calculations to the function as required. Also the matrics will be saved under 'outputs' dir.
