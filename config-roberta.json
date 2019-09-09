@@ -1,10 +1,10 @@
 {
-  "data_dir": "data/", 
+  "data_dir": "../data/", 
   "gpu": 3,
   "model_type": "roberta",
   "model_name": "roberta-base", 
   "task_name": "binary", 
-  "output_dir": "outputs_roberta/", 
+  "output_dir": "../outputs_roberta/", 
   "cache_dir": "cache/", 
   "do_train": true, 
   "do_eval": true, 

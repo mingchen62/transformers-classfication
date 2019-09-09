@@ -1,10 +1,10 @@
 {
-  "data_dir": "data/", 
+  "data_dir": "../data/", 
   "gpu": 3,
   "model_type": "xlnet",
   "model_name": "xlnet-base-cased", 
   "task_name": "binary", 
-  "output_dir": "outputs_xlnet/", 
+  "output_dir": "../outputs_xlnet/", 
   "cache_dir": "cache/", 
   "do_train": true, 
   "do_eval": true, 
