@@ -68,7 +68,7 @@ This is the required structure.
 
 % cd src
 
-% python transformer-compliance.py ../config-bert.json
+% CUDA_VISIBLE_DEVICES=0,1 python transformer-compliance.py ../config-bert.json
 
 Depending on size of datasize, it may take a while.
 
