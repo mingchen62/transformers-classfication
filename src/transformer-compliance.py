@@ -31,6 +31,8 @@ from pytorch_transformers import AdamW, WarmupLinearSchedule
 from utils import (convert_examples_to_features,
                         output_modes, processors)
 
+#from parallel import DataParallelModel, DataParallelCriterion
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -79,8 +81,7 @@ with open(args_json, 'r') as f:
 
 print(args)
 
-os.environ["CUDA_VISIBLE_DEVICES"] = str(args['gpu'])
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+#os.environ["CUDA_VISIBLE_DEVICES"] = str(args['gpu'])
 
 if os.path.exists(args['output_dir']) and os.listdir(args['output_dir']) and args['do_train'] and not args['overwrite_output_dir']:
     raise ValueError("Output directory ({}) already exists and is not empty. Use --overwrite_output_dir to overcome.".format(args['output_dir']))
@@ -98,6 +99,10 @@ config = config_class.from_pretrained(args['model_name'], num_labels=2, finetuni
 tokenizer = tokenizer_class.from_pretrained(args['model_name'])
 model = model_class.from_pretrained(args['model_name'])
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+if torch.cuda.device_count() > 1:
+  print("Let's use", torch.cuda.device_count(), "GPUs!")
+  model = torch.nn.DataParallel(model)
 
 model.to(device);
 
@@ -191,7 +196,7 @@ def train(train_dataset, model, tokenizer):
                       'token_type_ids': batch[2] if args['model_type'] in ['bert', 'xlnet'] else None,  # XLM don't use segment_ids
                       'labels':         batch[3]}
             outputs = model(**inputs)
-            loss = outputs[0]  # model outputs are always tuple in pytorch-transformers (see doc)
+            loss = outputs[0].mean()  # model outputs are always tuple in pytorch-transformers (see doc)
             print("\r%f" % loss, end='')
 
             if args['gradient_accumulation_steps'] > 1:
