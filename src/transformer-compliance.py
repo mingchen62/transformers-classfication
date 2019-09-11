@@ -81,8 +81,6 @@ with open(args_json, 'r') as f:
 
 print(args)
 
-#os.environ["CUDA_VISIBLE_DEVICES"] = str(args['gpu'])
-
 if os.path.exists(args['output_dir']) and os.listdir(args['output_dir']) and args['do_train'] and not args['overwrite_output_dir']:
     raise ValueError("Output directory ({}) already exists and is not empty. Use --overwrite_output_dir to overcome.".format(args['output_dir']))
 
