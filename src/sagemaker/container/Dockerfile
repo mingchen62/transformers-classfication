@@ -14,15 +14,17 @@
 # For more information on creating a Dockerfile
 # https://docs.docker.com/compose/gettingstarted/#step-2-create-a-dockerfile
 # https://github.com/awslabs/amazon-sagemaker-examples/master/advanced_functionality/pytorch_extending_our_containers/pytorch_extending_our_containers.ipynb
-ARG REGION=us-west-2
+ARG REGION=us-east-1
 
 # SageMaker PyTorch image
-FROM 520713654638.dkr.ecr.$REGION.amazonaws.com/sagemaker-pytorch:0.4.0-cpu-py3
+FROM 520713654638.dkr.ecr.$REGION.amazonaws.com/sagemaker-pytorch:1.0.0-gpu-py3
 
 ENV PATH="/opt/ml/code:${PATH}"
 
+RUN pip install  pytorch-transformers
+
 # /opt/ml and all subdirectories are utilized by SageMaker, we use the /code subdirectory to store our user code.
-COPY /cifar10 /opt/ml/code
+COPY /email-compliance-bert /opt/ml/code
 
 # this environment variable is used by the SageMaker PyTorch container to determine our user code directory.
 ENV SAGEMAKER_SUBMIT_DIRECTORY /opt/ml/code
@@ -30,4 +32,4 @@ ENV SAGEMAKER_SUBMIT_DIRECTORY /opt/ml/code
 # this environment variable is used by the SageMaker PyTorch container to determine our program entry point
 # for training and serving.
 # For more information: https://github.com/aws/sagemaker-pytorch-container
-ENV SAGEMAKER_PROGRAM cifar10.py
+ENV SAGEMAKER_PROGRAM email-compliance-bert.py
